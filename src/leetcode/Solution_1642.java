@@ -43,8 +43,8 @@ public class Solution_1642 {
                 if(currentLadders > 0){  //사다리 수만큼 queue 증가
                     queue.add(differenceHeight);
                     currentLadders--;
-                } else if(queue.size() > 0 && differenceHeight > queue.peek()){ //큐의 값이 존재하고 큐의 가장 작은 값이 높이차보다 작을 때
-                    //큐의 가장 작은 값을 벽돌에서 뺴주고 현재의 높이차를 큐에 넣어준다.
+                } else if(queue.size() > 0 && differenceHeight > queue.peek()){ //큐의 값이 존재하고 큐의 가장 작은 값이 높이차 보다 작을 때
+                    //큐의 가장 작은 값을 벽돌에서 뺴주고 현재의 높이 차를 큐에 넣어준다.
                     queue.add(differenceHeight);
                     currentBricks -= queue.poll();
                 } else {

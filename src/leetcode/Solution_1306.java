@@ -37,9 +37,11 @@ public class Solution_1306 {
     public static boolean canReach(int[] arr, int start) {
         //배열 체크
         if(arr == null || arr.length == 0) return false;
+
         //방문 체크
         boolean[] visited = new boolean[arr.length];
         visited[start] = true;
+
         //DFS
         return dfs(arr, start+arr[start], visited, start) || dfs(arr, start-arr[start], visited, start);
     }
@@ -49,6 +51,7 @@ public class Solution_1306 {
         if(resultIndex == index) return true;
         //방문 체크
         visited[index] = true;
+
         //다음 moving Index 값이 배열의 크기를 벗어나거나 방문했던 index에 왔을 때 false 반환
         if(resultIndex > arr.length-1 || resultIndex < 0 || visited[resultIndex] ) return false;
         else if(arr[resultIndex] == 0) return true;

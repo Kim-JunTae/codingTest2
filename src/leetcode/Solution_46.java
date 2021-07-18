@@ -15,68 +15,47 @@ public class Solution_46 {
         //Example3
         int[] nums3 = {1};
 
+        System.out.println("------------------------------------------------");
         List<List<Integer>> result1 = permute(nums1);
-        List<List<Integer>> result2 = permute(nums2);
-        List<List<Integer>> result3 = permute(nums3);
-
         System.out.println("result1 : " + result1);
 
         System.out.println("------------------------------------------------");
 
+        List<List<Integer>> result2 = permute(nums2);
         System.out.println("result2 : " + result2);
 
         System.out.println("------------------------------------------------");
 
+        List<List<Integer>> result3 = permute(nums3);
         System.out.println("result3 : " + result3);
 
         System.out.println("------------------------------------------------");
     }
 
-    //https://leetcode.com/problems/permutations/discuss/1339709/Java-solution-backtracking-to-return-permutations
-
     public static List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
 
-        int targetIndex = 1;
-
-        //1. 1차 세팅
-        for(int i=0; i<nums.length; i++){
-            List<Integer> item = new ArrayList<>();
-            item.add(nums[i]);
-            result.add(item);
-        }
-
-        makePermutation(targetIndex, nums, result);
+        List<Integer> item = new ArrayList<>();
+        makePermutation(item, 0, nums, result);
 
         return result;
     }
 
-    public static List<List<Integer>> makePermutation(int targetIndex, int[] nums, List<List<Integer>> result){
+    public static void makePermutation(List<Integer> item, int index, int[] nums, List<List<Integer>> result){
 
-        if(targetIndex == nums.length){
-            return result;
+        //out
+        if(index == nums.length){
+            result.add(new ArrayList<>(item));
+            return;
         }
 
-        for(List<Integer> item : result) {
-            for (int j = 0; j < nums.length; j++) {
-                int num = nums[j];
-                boolean chk = false;
+        List<Integer> newItem = new ArrayList<>(item);
 
-                for (int i = 0; i < item.size(); i++) {
-                    if (num != item.get(i)){
-                        chk = true;
-                    }
-                }
-                if (chk) {
-                    item.add(num);
-                    result.add(item);
-                    break;
-                }
-            }
+        //insert
+        for(int i=0; i<=index; i++){
+            newItem.add(i, nums[index]);
+            makePermutation(newItem, index+1, nums, result);
+            newItem.remove(i);
         }
-
-        targetIndex++;
-
-        return makePermutation(targetIndex, nums, result);
     }
 }
